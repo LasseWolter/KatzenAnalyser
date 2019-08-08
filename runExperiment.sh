@@ -36,9 +36,13 @@ printf "Starting docker container...\n"
 # The --rm flag causes the docker container to be removed after it's finished running and thus, not waste space on the local machine
 docker run --rm -v $PWD/$queueLogDir/$expName:/mix_net/queue_outputs/$expName \
            -v $PWD/$curExpDir/exp${expId}:/cliConf \
-       crosscoder/mix_net:v2 
+           crosscoder/mix_net:v2 
 
-
+# If no log directory was created this means that this iteration exited early - thus, rerun this iteration
+if [ ! -d "$queueLogDir/$expName/exp$expId/log" ]; then
+    echo "Something went wrong, rerunning this experiment iteration..."
+    runExperiment.sh $1 $2 $3 $4
+fi
 #printf "Experiment done, creating plots..."
 #./queue_outputs/makePlot.sh ./queue_outputs/$expName 
 #
