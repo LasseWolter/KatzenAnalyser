@@ -1,0 +1,47 @@
+[UpstreamProxy]
+Type = "none"
+
+[Logging]
+Disable = false
+Level = "DEBUG"
+File = "/mix_net/log/catshadow1.log"
+
+[NonvotingAuthority]
+Address = "127.0.0.1:2323"
+PublicKey = "MYFavSSFEHNyYSwYQmKKV/MRpxW5ZrOZHM9jZdHiNOo="
+
+[Account]
+Provider = "provider"
+#ProviderKeyPin ="MYFavSSFEHNyYSwYQmKKV/MRpxW5ZrOZHM9jZdHiNOo="
+
+[Registration]
+Address = "127.0.0.1:8082"
+[Registration.Options]
+  Scheme = "http"
+  UseSocks = false
+  #SocksNetwork = "tcp"
+  #SocksAddress = "127.0.0.1:9050"
+
+[Debug]
+  DisableDecoyLoops = false 
+  CaseSensitiveUserIdentifiers = false
+  PollingInterval = 3000
+
+[Panda]
+  Receiver = "+panda"
+  Provider = "serviceprovider"
+  BlobSize = 1000 
+
+[Experiment]
+  Duration=5
+  LambdaP=0.025
+  LambdaPMaxDelay=200000
+  Mu = 0.00025
+  MuMaxDelay = 20000
+  # Interval at which the server is polled for its message queue lengths [in milliseconds]
+  QueuePollInterval = 5
+  # Directory in which the queue length related logs are stored
+  QueueLogDir = "one"
+
+[[Client]]
+  Name = "cli1"
