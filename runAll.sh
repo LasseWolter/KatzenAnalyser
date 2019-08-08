@@ -19,9 +19,9 @@ do
     padded_i=$(printf '%02d' $i) # pad single digits with a zero for ordering purposes 
     if (($i %$maxSyncRuns==0 || $i == $expNum)); # Every 10th experiment is run in the forground such that nomore then 10 exp run at the same time
     then 
-        ./runExperiment.sh $1 $2 $padded_i 
+        ./runExperiment.sh $1 $2 $3 $padded_i 
     else
-        ./runExperiment.sh $1 $2 $padded_i &
+        ./runExperiment.sh $1 $2 $3 $padded_i &
     fi
 done
 
