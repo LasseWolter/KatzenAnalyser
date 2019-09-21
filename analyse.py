@@ -65,7 +65,7 @@ def calcStats(log_dir, start_sec=0, end_sec=0, only_steady=False):
 
     # Find start and end of the steady state of nodes[0] which is not necessarily the first node
     # in the mixnet but suffices to get the rough time for all steady states
-    win_size = 8000
+    win_size = 1000
     conv = np.convolve(
         data[nodes[0]].queueLength, np.ones(win_size), mode='same') / win_size
     diff = pd.Series(conv).diff()
@@ -165,6 +165,7 @@ def plotFig(data, nodes, exp_duration, stats_df, win_size, steady_start_time,
     ax1.axvline(x=steady_start_time, c='r')
     ax1.axvline(x=steady_end_time, c='r')
 
+    # PLOT CONVOLUTION
     # apply convolution with given window size
     ax3 = fig.add_subplot(212)
     ax3.set_xlim(-10, exp_duration + 10)  # +10 to give some space
@@ -184,6 +185,8 @@ def plotFig(data, nodes, exp_duration, stats_df, win_size, steady_start_time,
         qls = np.array(data[node].queueLength)
         # win_size can max be the number of samples
         win_size = len(qls) if win_size > len(qls) else win_size
+        # Using 'same' mode means we also see convolution products for x-values where the window and the graph
+        # don't fully overlap which means we get a rising and falling edge no matter what the data
         conv = np.convolve(qls, np.ones(win_size), mode='same') / win_size
         ax3.plot(data[node].relTime, conv)
 
