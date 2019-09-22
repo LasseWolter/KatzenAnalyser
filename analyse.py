@@ -106,7 +106,7 @@ def calcStats(log_dir, start_sec=0, end_sec=0, only_steady=False):
         df.loc[0]['mean_' + node] = q_length.mean()
         df.loc[0]['std_' + node] = q_length.std()
         df.loc[0]['zeroFreq_' +
-                  node] = q_length.value_counts(0).size / q_length.size
+                  node] = q_length.value_counts()[0] / q_length.size
 
     # Calculate the steady state period to show it on the plot
     stead_start = (steady_start_time - start_time).total_seconds()
@@ -213,7 +213,8 @@ def parse_conf(conf):
 
     parsed_conf = toml.loads(raw_conf)
     return (parsed_conf["Experiment"]["LambdaP"],
-            parsed_conf["Experiment"]["Mu"])
+            parsed_conf["Experiment"]["Mu"],
+            len(parsed_conf["Client"]))
 
 
 def make_mom_plot(df, ax, title=''):
@@ -264,7 +265,7 @@ def plot_mean_of_means(df_dict):
     # Print general parameters to the bottom of the plot
     params_str = ' | '.join(
         ('Parameters:', r'$\lambda P=%g$' % (LAMBDA_P), r'Mu=%g' % (MU),
-         r'$\frac{\lambda P}{Mu}=%g$' % (LAMBDA_P / MU), ''))
+         r'$\frac{\lambda P}{Mu}*numOfCli=%g*%d=%g$' % ((LAMBDA_P / MU), CLI_NUM, (LAMBDA_P / MU)*CLI_NUM)))
     fig.subplots_adjust(bottom=0.2)
     fig.text(0.5, 0.01, params_str, ha='center')
 
@@ -344,7 +345,7 @@ def parse_args():
 
 # Constants
 ARGS = parse_args()
-LAMBDA_P, MU = parse_conf(ARGS.config)
+LAMBDA_P, MU, CLI_NUM = parse_conf(ARGS.config)
 
 if __name__ == '__main__':
     dfs = {}
