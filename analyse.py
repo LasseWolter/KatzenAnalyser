@@ -65,11 +65,13 @@ def calcStats(log_dir, start_sec=0, end_sec=0, only_steady=False):
 
     # Find start and end of the steady state of nodes[0] which is not necessarily the first node
     # in the mixnet but suffices to get the rough time for all steady states
-    win_size = 1000
+    win_size = 3000
     conv = np.convolve(
         data[nodes[0]].queueLength, np.ones(win_size), mode='same') / win_size
     diff = pd.Series(conv).diff()
-    start_ind = diff.lt(0).idxmax()
+    # Make the threshold slightly negative such that a minor fall in the rise (several clients starting up after one another)
+    # isn't detected this is not needed for the stop_ind since all clients stop at the same time
+    start_ind = diff.lt(-0.005).idxmax()
     stop_ind = diff[::-1].gt(0).idxmax()
     steady_start_time = data[nodes[0]]['time'].iloc[start_ind]
     steady_end_time = data[nodes[0]]['time'].iloc[stop_ind]
@@ -260,11 +262,12 @@ def plot_mean_of_means(df_dict):
     """
     print("Plotting Mean of Means for %d DataFrames..." % (len(df_dict)))
     # Create a figure which size and subplot layout adjusts according to the number of DataFrames given
-
     fig, axs = plt.subplots(figsize=(5 * len(df_dict), 6),
-                            ncols=len(df_dict),
-                            constrained_layout=True,
-                            sharey=True)
+                            ncols=len(df_dict), sharey=True)
+
+    # Make sure that axs is a list even if there is just one subplot
+    axs = np.array([axs]).flatten().tolist()
+
     fig.suptitle("Server Msg Queue Length\nMean of Means")
 
     # Print general parameters to the bottom of the plot
@@ -277,13 +280,14 @@ def plot_mean_of_means(df_dict):
 
     # For each dataFrame create a plot an plot them next to one another
     for (i, title) in enumerate(df_dict.keys()):
-        make_mom_plot(df_dict[title], axs[i], title)
+        # Save stats to file
         file_title = ''.join(title.split(' '))
         path = os.path.join(ARGS.exp_dir, file_title + '.csv')
-        # Save stats to file
         with open(path, 'w+') as f:
             df_dict[title].to_csv(f)
         print('Saved .csv file for \"%s\": to %s' % (title, path))
+        # Make Plot for this dataframe
+        make_mom_plot(df_dict[title], axs[i], title)
 
     if ARGS.show == "show":
         fig.show()
