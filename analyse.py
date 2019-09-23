@@ -65,13 +65,14 @@ def calcStats(log_dir, start_sec=0, end_sec=0, only_steady=False):
 
     # Find start and end of the steady state of nodes[0] which is not necessarily the first node
     # in the mixnet but suffices to get the rough time for all steady states
-    win_size = 3000
+    win_size = 1000 *CLI_NUM
     conv = np.convolve(
         data[nodes[0]].queueLength, np.ones(win_size), mode='same') / win_size
     diff = pd.Series(conv).diff()
     # Make the threshold slightly negative such that a minor fall in the rise (several clients starting up after one another)
     # isn't detected this is not needed for the stop_ind since all clients stop at the same time
-    start_ind = diff.lt(-0.005).idxmax()
+    thrshold = CLI_NUM * 0.0008
+    start_ind = diff.lt(-thrshold).idxmax()
     stop_ind = diff[::-1].gt(0).idxmax()
     steady_start_time = data[nodes[0]]['time'].iloc[start_ind]
     steady_end_time = data[nodes[0]]['time'].iloc[stop_ind]
