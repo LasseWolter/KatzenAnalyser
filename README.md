@@ -1,7 +1,7 @@
 # KatzenAnalyser
 
 This repository contains:
-- a testbed to run experiments on the katzenpost mixnet 
+- scripts to run experiments on a docker testbed of the katzenpost mixnet 
 - a python script to analyse data produced by such experiments
 
 ---
