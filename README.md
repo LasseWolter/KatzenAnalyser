@@ -23,7 +23,7 @@ Installation and Setup
 
 The following steps describe how to install, setup and run the simulation.
 
-1.  Make sure you have docker installed - why docker? see \[Implementation\]
+1.  Make sure you have docker installed - why docker? see [Implementation](#implementation)
 
     -   If you don’t have docker installed, follow the installation guide here: <https://docs.docker.com/install/>
 
@@ -37,7 +37,7 @@ The following steps describe how to install, setup and run the simulation.
 
 4.  Go into the KatzenAnalyser repo using: cd KatzenAnalyser
 
-5.  Run `./runAll.sh` without any arguments to see its usage:
+5.  Run `./runAll.sh` without any arguments to see its usage:  
     `Usage ./runAll.sh <expConfig> <queueLogDir> <expName> <expNum> <maxSyncRuns>`
 
     -   **expConfig:** the config file for the experiments -&gt; e.g. sample.toml
@@ -50,7 +50,7 @@ The following steps describe how to install, setup and run the simulation.
 
     -   **maxSyncRuns**: MaxNumber of experiments that are run at the same time (not guaranteed because of hacky implementation but functional)
 
-6.  Run the ./runAll.sh with any arguments you would like to use, e.g.
+6.  Run the ./runAll.sh with any arguments you would like to use, e.g.  
     ` sudo ./runAll.sh sample.toml queue_outputs test_exp 10 5` (again, you can possibly leave out sudo if you can run docker without it)
 
     -   this e.g. will run 10 experiments where 5 experiments are run at a time (thus, you’ll have 2 rounds) using the sample.toml as config and creating your outputs in the folder `queue_outputs/test_exp`
