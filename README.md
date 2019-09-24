@@ -250,17 +250,18 @@ Setup and Usage
 ---------------
 
 The script was developed with python 3.5 and any version above should work as well - backwards compatibility is not guaranteed though.
-I recommend creating a new python virtual environment and installing the required dependencies from the `requirements.txt` file by running the following command from within the `KatzenAnalyser\` directory:
-`pip install -r requirements.txt`
-Now running the script without any arguments will show the usage:
-` Usage: analyse.py <exp_dir> <config> (<from_disc>) (<show>)`
-**Required arguments**
+I recommend creating a new python virtual environment and installing the required dependencies from the `requirements.txt` file by running the following command from within the `KatzenAnalyser\` directory:  
+`pip install -r requirements.txt`  
+Now running the script without any arguments will show the usage:  
+` Usage: analyse.py <exp_dir> <config> (<from_disc>) (<show>)`  
+  
+**Required arguments**  
 
 -   `exp_dir:` The top level directory of the experiment. This directory should contain several directories named `exp01/`, `exp02/`, etc. as described in section \[dirStruc\]
 
--   `config:` The toml-config file used for the experiment, e.g. sample.toml
+-   `config:` The toml-config file used for the experiment, e.g. sample.toml  
 
-**Optional arguments**
+**Optional arguments**  
 
 -   `(from_disc)`: passing the string `"from_disc"` (without quotation marks) as third argument will read .csv files from disc instead of analysing the raw data from all the `expN/` folders.
     This won’t work the first time you run the script for new results since the .csv files of the statistics are created during the first analysis.
