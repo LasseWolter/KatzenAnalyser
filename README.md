@@ -214,12 +214,13 @@ The repository contains a python script called `analyse.py` which helps analysin
 I recommend creating a new python virtual environment and installing the required dependencies from the `requirements.txt` file by running the following command from within the `KatzenAnalyser\` directory:
 `pip install -r requirements.txt`
 Now running the script without any arguments will show the usage:  
-` Usage: analyse.py <exp_dir> <config> (<from_disc>) (<show>)`
+` Usage: analyse.py <exp_dir> <config> (<from_disc>) (<show>)`  
+  
 **Required arguments**  
 
 -   `exp_dir:` The top level directory of the experiment. This directory should contain several directories named `exp01/`, `exp02/`, etc. as described in section \[dirStruc\]
 
--   `config:` The toml-config file used for the experiment, e.g. sample.toml
+-   `config:` The toml-config file used for the experiment, e.g. sample.toml  
 
 **Optional arguments**  
 
