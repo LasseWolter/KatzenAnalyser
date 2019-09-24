@@ -15,7 +15,7 @@ If you would like to work with the most recent version of the katzenpost mixnet,
 Introduction
 ------------
 
-The testbed used for the experiments was build on top of the Katzenpost messaging client catshadow [3]. For the purpose of the simulation certain features catshadow provides, like an implementation of rendezvous point, weren’t relevant. Catshadow was merely used as it provided a relatively simple way to establish a message exchange over the katzenpost mixnet, which was essential for the investigations carried out by this research project.
+The testbed used for the experiments was build on top of the Katzenpost messaging client [catshadow](https://github.com/katzenpost/catshadow). For the purpose of the simulation certain features catshadow provides, like an implementation of rendezvous point, weren’t relevant. Catshadow was merely used as it provided a relatively simple way to establish a message exchange over the katzenpost mixnet, which was essential for the investigations carried out by this research project.
 
 Features
 --------
@@ -210,21 +210,21 @@ Each runAll.sh creates a directory within &lt;queueLogDir&gt; named &lt;expName&
 Analysing the results
 =====================
 
-The repository <https://github.com/LasseWolter/KatzenAnalyser> contains a python script called `analyse.py` which helps analysing the results produced by the experiments. The script produces two types of plots
+The repository contains a python script called `analyse.py` which helps analysing the results produced by the experiments. The script produces two types of plots
 
 1.  two plots in each `expN` directory
 
-    -   `whole_duration.png`: consists of two plots - [example fig](#example_figs)
+    -   `whole_duration.png`: consists of two plots - [example fig](#whole-period)
 
         -   **top**: showing the message queue length of the different nodes over the whole period of the experiment
 
         -   **bottom**: top plot with convolution applied to it
 
-    -   `only_steady.png`: consists of two plots - [example fig](#example_figs)
+    -   `only_steady.png`: consists of two plots - [example fig](#only-steady-period)
 
         -   **top**: showing the message queue length of the different nodes during the steady period of the experiment only - meaning the period during which the message queue lengths are at a steady state
 
-        -   **bottom**: top plot with convolution applied to it - the edges only appear because of the convolution[7]
+        -   **bottom**: top plot with convolution applied to it - the edges only appear because of the convolution (Applying convolution at the edges causes parts of the window to be multiplied with 0 which causes these rising and falling edges)
 
 2.  a concluding plot in the top-level experiment directory
 
@@ -238,10 +238,13 @@ Further all of these plots contain some statistics, namely:
 
 -   **zeroFreq**: the ratio of times which queue length 0 appears to the total number of queue lengths
 
-<a name="example_figs">
+<a name="example_figs"></a>
+### Example figures
+#### Whole period
 ![whole_period](https://user-images.githubusercontent.com/29123172/65533496-a3ebbc80-def5-11e9-83e9-614ef0688811.png)  
+#### Only Steady period
 ![only_steady](https://user-images.githubusercontent.com/29123172/65533504-a64e1680-def5-11e9-9666-82282bbe39d0.png)
-</a>
+
 
 Setup and Usage
 ---------------
