@@ -210,19 +210,54 @@ Each runAll.sh creates a directory within &lt;queueLogDir&gt; named &lt;expName&
 Analysing the results
 =====================
 
-The repository contains a python script called `analyse.py` which helps analysing the results produced by the experiments. The script was developed with python 3.5 and any version above should work as well - backwards compatibility is not guaranteed though.
+The repository <https://github.com/LasseWolter/KatzenAnalyser> contains a python script called `analyse.py` which helps analysing the results produced by the experiments. The script produces two types of plots
+
+1.  two plots in each `expN` directory
+
+    -   `whole_duration.png`: consists of two plots - [example fig](#example_figs)
+
+        -   **top**: showing the message queue length of the different nodes over the whole period of the experiment
+
+        -   **bottom**: top plot with convolution applied to it
+
+    -   `only_steady.png`: consists of two plots - [example fig](#example_figs)
+
+        -   **top**: showing the message queue length of the different nodes during the steady period of the experiment only - meaning the period during which the message queue lengths are at a steady state
+
+        -   **bottom**: top plot with convolution applied to it - the edges only appear because of the convolution[7]
+
+2.  a concluding plot in the top-level experiment directory
+
+    -   Showing the mean of means of the queue lengths of the different nodes over all experiment, also displaying error bars
+
+Further all of these plots contain some statistics, namely:
+
+-   **mean**: the mean queue length over the course of the experiment
+
+-   **std**: the standard deviation from this mean
+
+-   **zeroFreq**: the ratio of times which queue length 0 appears to the total number of queue lengths
+
+<a name="example_figs">
+![whole_period](https://user-images.githubusercontent.com/29123172/65533496-a3ebbc80-def5-11e9-83e9-614ef0688811.png)  
+![only_steady](https://user-images.githubusercontent.com/29123172/65533504-a64e1680-def5-11e9-9666-82282bbe39d0.png)
+</a>
+
+Setup and Usage
+---------------
+
+The script was developed with python 3.5 and any version above should work as well - backwards compatibility is not guaranteed though.
 I recommend creating a new python virtual environment and installing the required dependencies from the `requirements.txt` file by running the following command from within the `KatzenAnalyser\` directory:
 `pip install -r requirements.txt`
-Now running the script without any arguments will show the usage:  
-` Usage: analyse.py <exp_dir> <config> (<from_disc>) (<show>)`  
-  
-**Required arguments**  
+Now running the script without any arguments will show the usage:
+` Usage: analyse.py <exp_dir> <config> (<from_disc>) (<show>)`
+**Required arguments**
 
 -   `exp_dir:` The top level directory of the experiment. This directory should contain several directories named `exp01/`, `exp02/`, etc. as described in section \[dirStruc\]
 
--   `config:` The toml-config file used for the experiment, e.g. sample.toml  
+-   `config:` The toml-config file used for the experiment, e.g. sample.toml
 
-**Optional arguments**  
+**Optional arguments**
 
 -   `(from_disc)`: passing the string `"from_disc"` (without quotation marks) as third argument will read .csv files from disc instead of analysing the raw data from all the `expN/` folders.
     This won’t work the first time you run the script for new results since the .csv files of the statistics are created during the first analysis.
