@@ -121,13 +121,13 @@ def calcStats(log_dir, start_sec=0, end_sec=0, only_steady=False):
     stead_end = (steady_end_time - start_time).total_seconds()
 
     plotFig(data, nodes, exp_duration, df, win_size, stead_start, stead_end,
-            log_dir)
+            log_dir, only_steady)
 
     return df
 
 
 def plotFig(data, nodes, exp_duration, stats_df, win_size, steady_start_time,
-            steady_end_time, log_dir):
+            steady_end_time, log_dir, only_steady):
     """
     Plot two plots in one figure
         - the original data
@@ -203,7 +203,12 @@ def plotFig(data, nodes, exp_duration, stats_df, win_size, steady_start_time,
     ax3.axvline(x=steady_end_time, c='r')
 
     fig.legend(labels=nodes + ['steady_period_edge'])
-    path = os.path.join(log_dir, str(int(exp_duration)) + "s.png")
+
+    if only_steady:
+        path = os.path.join(log_dir, "only_steady.png")
+    else:
+        path = os.path.join(log_dir, "whole_period.png")
+
     fig.savefig(path)
 
     if ARGS.show == "show":
