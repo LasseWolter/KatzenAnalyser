@@ -150,7 +150,7 @@ The following steps describe how to install, setup and run the simulation.
 3.  Clone the KatzenAnalyser repo using:
     ` git clone https://github.com/LasseWolter/KatzenAnalyser.git`
 
-    -   this contains two bash files for running a single/a bunch of experiments and one sample config file (some more comments need to be added)
+    -   this contains two bash files for running a single/a bunch of experiments and one sample config file
 
 4.  Go into the KatzenAnalyser repo using: cd KatzenAnalyser
 
@@ -159,7 +159,7 @@ The following steps describe how to install, setup and run the simulation.
 
     -   **expConfig:** the config file for the experiments -&gt; e.g. sample.toml
 
-    -   **queueLogDir:** top-level directory in which all the logs/results are supposed to be stored - also see \[dirStruc\]
+    -   **queueLogDir:** top-level directory in which all the logs/results are supposed to be stored - also see [Directory Structure](#directory-structure)
 
     -   **expName**: Name of your experiment - will determine the experiment dir inside the &lt;queueLogDir&gt; directory as shown in [Directory Structure](#directory-structure)
 
