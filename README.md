@@ -256,6 +256,9 @@ Setup and Usage
 The script was developed with python 3.5 and any version above should work as well - backwards compatibility is not guaranteed though.
 I recommend creating a new python virtual environment and installing the required dependencies from the `requirements.txt` file by running the following command from within the `KatzenAnalyser\` directory:  
 `pip install -r requirements.txt`  
+Possibly an error complaining about a missing module called `tkinter` is thrown. This can be fixed by installing it as follows:  
+    - `sudo apt install python3-tk`
+    
 Now running the script without any arguments will show the usage:  
 ` Usage: analyse.py <exp_dir> <config> (<from_disc>) (<show>)`  
   
