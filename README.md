@@ -150,9 +150,12 @@ The following steps describe how to install, setup and run the simulation.
 3.  Clone the KatzenAnalyser repo using:
     ` git clone https://github.com/LasseWolter/KatzenAnalyser.git`
 
-    -   this contains two bash files for running a single/a bunch of experiments and one sample config file
+    -   this contains:
+        - `runAll.sh`: A bash script for running a bunch of experiments - options described below 
+            - this script uses `runExperiment.sh`: A bash file for running a single experiment 
+        - `sample.toml`: A sample config file which can be passed to the `runAll.sh`-script
 
-4.  Go into the KatzenAnalyser repo using: cd KatzenAnalyser
+4.  Go into the KatzenAnalyser repo using: `cd KatzenAnalyser`
 
 5.  Run `./runAll.sh` without any arguments to see its usage:  
     `Usage ./runAll.sh <expConfig> <queueLogDir> <expName> <expNum> <maxSyncRuns>`
