@@ -154,6 +154,7 @@ The following steps describe how to install, setup and run the simulation.
         - `runAll.sh`: A bash script for running a bunch of experiments - options described below 
             - this script uses `runExperiment.sh`: A bash file for running a single experiment 
         - `sample.toml`: A sample config file which can be passed to the `runAll.sh`-script
+        - `analyse.py`: A python script for analysing experiment results - see [Analysing the results](#analysing-the-results)
 
 4.  Go into the KatzenAnalyser repo using: `cd KatzenAnalyser`
 
