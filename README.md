@@ -261,7 +261,7 @@ Now running the script without any arguments will show the usage:
   
 **Required arguments**  
 
--   `exp_dir:` The top level directory of the experiment. This directory should contain several directories named `exp01/`, `exp02/`, etc. as described in section \[dirStruc\]
+-   `exp_dir:` The top level directory of the experiment. This directory should contain several directories named `exp01/`, `exp02/`, etc. as described in section [Directory Structure](#directory-structure)
 
 -   `config:` The toml-config file used for the experiment, e.g. sample.toml  
 
