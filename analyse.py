@@ -26,6 +26,7 @@ def calcStats(log_dir, start_sec=0, end_sec=0, only_steady=False):
     # Take out the log files which log queueLengths
     log_files = os.listdir(log_dir)
     nodes = [x for x in log_files if x.startswith('ql_')]
+    nodes.sort() # make sure the files are in sorted order
 
     data = {}  # contains a DataFrame for each logFile
     start_ind = sys.maxsize
@@ -63,11 +64,12 @@ def calcStats(log_dir, start_sec=0, end_sec=0, only_steady=False):
     # Calculate experiment Duration in seconds
     exp_duration = (end_time - start_time).total_seconds()
 
-    # Find start and end of the steady state of nodes[0] which is not necessarily the first node
+    # This steady_node is really IMPORTANT. It's used to find start and end of the steady state, thus, it should have queueLengths representative of the experiment - the service_provider is not suitable for this
+    steady_node = nodes[0] # after sorting this will be one of the mixes
     # in the mixnet but suffices to get the rough time for all steady states
     win_size = 1000 *CLI_NUM
     conv = np.convolve(
-        data[nodes[0]].queueLength, np.ones(win_size), mode='same') / win_size
+        data[steady_node].queueLength, np.ones(win_size), mode='same') / win_size
     diff = pd.Series(conv).diff()
     # Make the threshold slightly negative such that a minor fall in the rise (several clients starting up after one another)
     # isn't detected this is not needed for the stop_ind since all clients stop at the same time
