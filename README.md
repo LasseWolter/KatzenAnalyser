@@ -5,6 +5,9 @@ This repository contains:
 - scripts to run experiments on a docker testbed of the [katzenpost mixnet](https://github.com/katzenpost/)
 - a python script to analyse data produced by such experiments
 
+This repo does NOT contain:
+- go-source files which are under the hood of the mixnet components
+    - if you are interested in this and want to edit them or maybe edit the structure of the mixnet then checkout the [katzenpost_exp_env-repo](https://github.com/LasseWolter/katzenpost_exp_env)
 ---
 ### Disclaimer
 This testbed is given as is and won't be updated to work with the most recent version of the katzenpost mixnet.  
@@ -29,6 +32,8 @@ The simulation in its current state has a **fixed** network topology consisting 
 -   *1 Service Provider*: Providing different services, like a remote spool to implement the rendezvous points
 
 -   *1 Mix*: Acting as only mix on the only mix-layer of the network
+
+*If you are interested in changing this structure checkout the [katzenpost_exp_env-repo](https://github.com/LasseWolter/katzenpost_exp_env)*
 
 The User can pass a .toml-config file to the simulation as described in [Installation and Setup](#installation-and-setup). Within this config the user can change the following parameters:
 

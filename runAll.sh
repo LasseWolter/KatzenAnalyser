@@ -34,5 +34,5 @@ do
 done
 
 # On last iteration change permissions for queueLogFolder since it's created with root priveleges 
-sudo chown -R $USER:$USER ${queueLogDir}/${expName} 
+sudo chown -R $USER:$USER ${queueLogDir}/${expName}  # change it to your local user 
 sudo chmod -R 755 ${queueLogDir}/${expName} 
